@@ -1,0 +1,123 @@
+nav {
+    display: flex;
+    width: 100%;
+    background-color: black;
+    color: white;
+    justify-content: space-around;
+    text-align: center;
+    padding: 10px 30px;
+    align-items: center;
+    flex-direction: column;
+}
+nav>:nth-child(1){
+    display: flex;
+    width: 100%;
+    background-color: black;
+    color: white;
+    justify-content: flex-end;
+    text-align: center;
+    padding: 10px 30px;
+    align-items: center;
+
+}
+nav>:nth-child(3){
+    display: flex;
+    width: 100%;
+    background-color: black;
+    color: white;
+    justify-content: space-around;
+    text-align: center;
+    padding: 10px 30px;
+    align-items: center;
+}
+nav>:nth-child(3)>div>.icon {
+
+    background-color: black;
+    margin-right: 100px;
+}
+
+nav>:nth-child(3)>div>.icon>h2 {
+    padding: 0px 2px;
+    background-color: white;
+    color: black;
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+
+
+.mid_section {
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left_section{
+     width: 30%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+#displayAccount {
+    display: none;
+}
+
+
+.media_searchbar{
+    display: none;
+}
+
+@media screen and (max-width: 1030px) {
+    nav>:nth-child(3) {
+
+        display: flex;
+        flex-direction: column;
+    }
+    nav>:nth-child(1){
+        display: none;
+    }
+     nav>:nth-child(2){
+        display: none;
+    }
+    .mid_section {
+        display: none;
+    }
+    .left_section{
+        display: none;
+    }
+    #displayAccount {
+        width: 20%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    nav>:nth-child(3)>:nth-child(1) {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    nav>:nth-child(3)>:nth-child(1)>.icon {
+
+        color: black;
+    }
+
+    nav>:nth-child(3)>:nth-child(1)>.icon>h2 {
+        padding: 2px 2px;
+        background-color: white;
+    }
+
+    .media_searchbar {
+        display: block;
+        width: 100%;
+        margin-top: 5px;
+
+    }
+
+    .media_searchbar Input {
+        max-width: 100%;
+    }
+
+   
+}
