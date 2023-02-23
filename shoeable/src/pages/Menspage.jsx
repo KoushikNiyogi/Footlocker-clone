@@ -132,10 +132,30 @@ const Menspage = () => {
                       </AccordionButton>
                     </h2>
                     <AccordionPanel pb={4}>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                      minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                      aliquip ex ea commodo consequat.
+                    <CheckboxGroup >
+                        <Stack spacing={5} direction={"column"} onChange={(e)=>{
+                          let obj = {}
+                          if(e.target.checked){
+                            obj["productline"] = e.target.value;
+                          }
+                          console.log(obj)
+                          axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens`,{
+                            params:{
+                              ...obj
+                            }
+                          })
+                          .then((res) => {
+                            console.log(res)
+                            setState(res.data)
+                          })
+                          .catch((err) => console.log(err))
+                          }}>
+                          <Checkbox value='Adidas'>Adidas</Checkbox>
+                          <Checkbox value='Puma'>Puma</Checkbox>
+                          <Checkbox value='Reebok'>Reebok</Checkbox>
+                          <Checkbox value='Nike'>Nike</Checkbox>
+                        </Stack>
+                      </CheckboxGroup>
                     </AccordionPanel>
                   </>
                 )}
