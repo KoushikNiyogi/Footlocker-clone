@@ -9,9 +9,9 @@ import {
   } from '@chakra-ui/react'
 import {GiHamburgerMenu} from "react-icons/gi"
 import React from 'react'
-import { useNavigate,Link as RouteLink } from 'react-router-dom';
+import { Link as RouteLink } from 'react-router-dom';
+import Login from '../pages/Login';
 export default function DrawerExample({data}) {
-    const Navigate = useNavigate();
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef()
   
@@ -31,7 +31,7 @@ export default function DrawerExample({data}) {
             <DrawerCloseButton />
   
             <DrawerBody>
-              <Button onClick={()=>Navigate("/singup")}>Create Your Account</Button>
+              <Button><Login/></Button>
               <div>
                 {data.map((item)=>{
 

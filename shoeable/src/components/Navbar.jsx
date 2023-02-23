@@ -1,10 +1,12 @@
 import React from 'react'
 import "./Navbar.css"
 import DrawerExample from './drawer'
-import { NavLink, Link as RouterLink } from "react-router-dom";
-import { Input, Stack, InputGroup, InputRightAddon, Text ,Divider } from '@chakra-ui/react';
+import { NavLink, Link as RouterLink, useNavigate } from "react-router-dom";
+import { Input, Stack, InputGroup, InputRightAddon, Text ,Divider,Button } from '@chakra-ui/react';
 import { BsSearch, BsFillCartFill, BsHeart } from 'react-icons/bs';
 import Login from "../pages/Login"
+import { AuthContext } from '../Context/AuthContext';
+import { useContext } from 'react';
 const navbar = [
   { to: "/mens", title: "Men's" },
   { to: "/womens", title: "Women's" },
@@ -15,19 +17,22 @@ const navbar = [
   { to: "/*", title: "New Arrival" }]
 
 const Navbar = () => {
+  const {state,dispatch} = useContext(AuthContext);
+  const{isAuth,username} = state;
+  const Navigate = useNavigate();
   return (
 
     <nav>
       <div className='top_section_text'>   
         <Text fontSize='sm' mr="1rem">Find Store</Text>
-        <Text fontSize='sm' mr="1rem"><Login/></Text>
+        <Text fontSize='sm' mr="1rem">{isAuth ? <Button bg={"black"} color={"white"} onClick={()=>dispatch({type:"LogoutUser"})}>Hi {username}, Logout</Button>:<Login/>}</Text>
         <Text fontSize='sm' mr="1rem">Customer Service</Text>
 
       </div>
       <Divider />
       <div>
         <div>
-          <div className="icon">
+          <div className="icon" onClick={()=>Navigate("/")}>
             <h2 >Shoeable</h2>
           </div>
 
