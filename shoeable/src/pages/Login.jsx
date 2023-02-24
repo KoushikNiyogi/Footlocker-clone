@@ -22,7 +22,7 @@ import {
 } from '@chakra-ui/react'
 import React, { useEffect, useState } from "react"
 export default function Login() {
-  const {state,dispatch} = useContext(AuthContext)
+  const {dispatch} = useContext(AuthContext)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const Navigate = useNavigate();
   const initialRef = React.useRef(null)
@@ -32,7 +32,6 @@ export default function Login() {
   const [userdata,setUserdata] = useState([]);
   const toast = useToast()
 
-  console.log(process.env.REACT_APP_JSON_SERVER_PORT);
 
 
   useEffect(()=>{

@@ -8,7 +8,7 @@ import Wishlist from './Wishlist'
 import NotFound from './NotFound'
 import Clothing from './Clothing'
 import Signup from './Signup'
-
+import ProductPage from './ProductPage'
 import { Route,Routes } from 'react-router-dom'
 const Allroutes = () => {
   return (
@@ -21,7 +21,7 @@ const Allroutes = () => {
         <Route path='/cart' element={<Cart/>}/>
         <Route path='/wishlist' element={<Wishlist/>}/>
         <Route path='/signup' element={<Signup/>}/>
-
+        <Route path='/product/:id' element={<ProductPage/>}/>
         <Route path='*' element={<NotFound/>}/>
     </Routes>
   )

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./Navbar.css"
 import DrawerExample from './drawer'
 import { NavLink, Link as RouterLink, useNavigate } from "react-router-dom";
@@ -7,6 +7,7 @@ import { BsSearch, BsFillCartFill, BsHeart } from 'react-icons/bs';
 import Login from "../pages/Login"
 import { AuthContext } from '../Context/AuthContext';
 import { useContext } from 'react';
+import axios from 'axios';
 const navbar = [
   { to: "/mens", title: "Men's" },
   { to: "/womens", title: "Women's" },
@@ -16,10 +17,21 @@ const navbar = [
   { to: "/*", title: "Sale" },
   { to: "/*", title: "New Arrival" }]
 
-const Navbar = () => {
+const Navbar = ({setState}) => {
   const {state,dispatch} = useContext(AuthContext);
   const{isAuth,username} = state;
+  const [text,setText] = useState();
   const Navigate = useNavigate();
+  const handleSearch = (e)=>{
+    setText(e.target.value);
+  }
+  const handlesearchClick = ()=>{
+    axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens&q=${text}`)
+    .then((res)=>{
+      console.log(res.data);
+      setState(res.data)})
+    .catch((res)=>console.log(res));
+  }
   return (
 
     <nav>
@@ -66,8 +78,8 @@ const Navbar = () => {
         <div className='left_section'  >
           <Stack spacing={4}>
             <InputGroup size='sm'>
-              <Input placeholder='mysite' backgroundColor="white" color="black" />
-              <InputRightAddon backgroundColor="black" children={<BsSearch />} />
+              <Input placeholder='mysite' backgroundColor="white" color="black" onChange={(e)=>handleSearch(e)}/>
+              <InputRightAddon backgroundColor="black" children={<BsSearch />} onClick={()=>handlesearchClick()}/>
             </InputGroup>
           </Stack>
           <RouterLink to="/wishlist"><BsHeart /></RouterLink>
@@ -77,8 +89,8 @@ const Navbar = () => {
         <div className='media_searchbar'>
           <Stack spacing={4}>
             <InputGroup>
-              <Input placeholder='mysite' backgroundColor="white" color="black" />
-              <InputRightAddon backgroundColor="black" children={<BsSearch />} />
+              <Input placeholder='mysite' backgroundColor="white" color="black" onChange={(e)=>handleSearch(e)}/>
+              <InputRightAddon backgroundColor="black" children={<BsSearch />} onClick={()=>handlesearchClick()}/>
             </InputGroup>
           </Stack>
         </div>
