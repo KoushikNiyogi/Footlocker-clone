@@ -2,12 +2,57 @@ import React, { useEffect, useState } from 'react'
 import axios from "axios"
 import Navbar from "../components/Navbar"
 import Footer from '../components/Footer'
-import { Box, Flex, CheckboxGroup, Stack, Image, SimpleGrid, Checkbox, Accordion, AccordionItem, AccordionButton, AccordionPanel } from '@chakra-ui/react'
-import { BsBox } from 'react-icons/bs'
-import { FiMinus } from "react-icons/fi"
-import { GrFormAdd } from "react-icons/gr"
+import { Box, Stack, Heading, Text, Divider, Flex, Image, SimpleGrid, Hide, Button, Select } from '@chakra-ui/react'
+import { Card, CardBody } from '@chakra-ui/react'
+import Filter from '../components/Filter'
+import { Link as RouterLink } from "react-router-dom"
+
 const Menspage = () => {
   const [state, setState] = useState([])
+  const [showfilter, Togglefilter] = useState(false);
+  const handleChange = (e) => {
+    let select = e.target.value;
+    if (select === "A to Z") {
+      axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens&_sort=name&_order=asc`)
+        .then((res) => {
+          console.log(res.data);
+          setState(res.data);
+        })
+        .catch((err) => console.log(err))
+    }
+    if (select === "Z to A") {
+      axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens&_sort=name&_order=desc`)
+        .then((res) => {
+          console.log(res.data);
+          setState(res.data);
+        })
+        .catch((err) => console.log(err))
+    }
+    if (select === "asc") {
+      axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens&_sort=price&_order=asc`)
+        .then((res) => {
+          console.log(res.data);
+          setState(res.data);
+        })
+        .catch((err) => console.log(err))
+    }
+    if (select === "desc") {
+      axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens&_sort=price&_order=desc`)
+        .then((res) => {
+          console.log(res.data);
+          setState(res.data);
+        })
+        .catch((err) => console.log(err))
+    }
+    if (select === "") {
+      axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens`)
+        .then((res) => {
+          console.log(res.data);
+          setState(res.data);
+        })
+        .catch((err) => console.log(err))
+    }
+  }
   useEffect(() => {
     axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens`)
       .then((res) => {
@@ -16,184 +61,74 @@ const Menspage = () => {
       })
       .catch((err) => console.log(err))
   }, [])
+  console.log(state)
   return (
     <div>
-      <Navbar />
+      <Navbar setState={setState} />
 
 
       <Box>
 
-        <Flex>
-          <Box width={"20%"}>
-            <Accordion allowMultiple>
+        <Flex direction={{ base: 'column', lg: "row" }}>
 
-              <AccordionItem>
-                {({ isExpanded }) => (
-                  <>
-                    <h2>
-                      <AccordionButton>
-                        <Box as="span" flex='1' textAlign='left'>
-                          Color
-                        </Box>
-                        {isExpanded ? (
-                          <FiMinus fontSize='12px' />
-                        ) : (
-                          <GrFormAdd fontSize='12px' />
-                        )}
-                      </AccordionButton>
-                    </h2>
-                    <AccordionPanel pb={4}>
-                      <CheckboxGroup >
-                        <Stack spacing={5} direction={"column"} onChange={(e)=>{
-                          let obj = {}
-                          if(e.target.checked){
-                            const color = Symbol("color");
-                            obj.color = e.target.value;
-                          }
-                          console.log(obj)
-                          axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens`,{
-                            params:{
-                              ...obj
-                            }
-                          })
-                          .then((res) => {
-                            console.log(res)
-                            setState(res.data)
-                          })
-                          .catch((err) => console.log(err))
-                          }}>
-                          <Checkbox value='Black'>Black</Checkbox>
-                          <Checkbox value='Blue'>Blue</Checkbox>
-                          <Checkbox value='Brown'>Brown</Checkbox>
-                          <Checkbox value='Orange'>Orange</Checkbox>
-                        </Stack>
-                      </CheckboxGroup>
-                    </AccordionPanel>
-                  </>
-                )}
-              </AccordionItem>
-              <AccordionItem>
-                {({ isExpanded }) => (
-                  <>
-                    <h2>
-                      <AccordionButton>
-                        <Box as="span" flex='1' textAlign='left'>
-                          Productline
-                        </Box>
-                        {isExpanded ? (
-                          <FiMinus fontSize='12px' />
-                        ) : (
-                          <GrFormAdd fontSize='12px' />
-                        )}
-                      </AccordionButton>
-                    </h2>
-                    <AccordionPanel pb={4}>
-                    <CheckboxGroup >
-                        <Stack spacing={5} direction={"column"} onChange={(e)=>{
-                          let obj = {}
-                          if(e.target.checked){
-                            obj["productline"] = e.target.value;
-                          }
-                          console.log(obj)
-                          axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens`,{
-                            params:{
-                              ...obj
-                            }
-                          })
-                          .then((res) => {
-                            console.log(res)
-                            setState(res.data)
-                          })
-                          .catch((err) => console.log(err))
-                          }}>
-                          <Checkbox value='Adidas'>Adidas</Checkbox>
-                          <Checkbox value='Puma'>Puma</Checkbox>
-                          <Checkbox value='Reebok'>Reebok</Checkbox>
-                          <Checkbox value='Nike'>Nike</Checkbox>
-                        </Stack>
-                      </CheckboxGroup>
-                    </AccordionPanel>
-                  </>
-                )}
-              </AccordionItem>
-              <AccordionItem>
-                {({ isExpanded }) => (
-                  <>
-                    <h2>
-                      <AccordionButton>
-                        <Box as="span" flex='1' textAlign='left'>
-                          Section 2 title
-                        </Box>
-                        {isExpanded ? (
-                          <FiMinus fontSize='12px' />
-                        ) : (
-                          <GrFormAdd fontSize='12px' />
-                        )}
-                      </AccordionButton>
-                    </h2>
-                    <AccordionPanel pb={4}>
-                    <CheckboxGroup >
-                        <Stack spacing={5} direction={"column"} onChange={(e)=>{
-                          let obj = {}
-                          if(e.target.checked){
-                            obj["productline"] = e.target.value;
-                          }
-                          console.log(obj)
-                          axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens`,{
-                            params:{
-                              ...obj
-                            }
-                          })
-                          .then((res) => {
-                            console.log(res)
-                            setState(res.data)
-                          })
-                          .catch((err) => console.log(err))
-                          }}>
-                          <Checkbox value='Adidas'>Adidas</Checkbox>
-                          <Checkbox value='Puma'>Puma</Checkbox>
-                          <Checkbox value='Reebok'>Reebok</Checkbox>
-                          <Checkbox value='Nike'>Nike</Checkbox>
-                        </Stack>
-                      </CheckboxGroup>
-                    </AccordionPanel>
-                  </>
-                )}
-              </AccordionItem>
-              <AccordionItem>
-                {({ isExpanded }) => (
-                  <>
-                    <h2>
-                      <AccordionButton>
-                        <Box as="span" flex='1' textAlign='left'>
-                          Section 2 title
-                        </Box>
-                        {isExpanded ? (
-                          <FiMinus fontSize='12px' />
-                        ) : (
-                          <GrFormAdd fontSize='12px' />
-                        )}
-                      </AccordionButton>
-                    </h2>
-                    <AccordionPanel pb={4}>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                      minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                      aliquip ex ea commodo consequat.
-                    </AccordionPanel>
-                  </>
-                )}
-              </AccordionItem>
-            </Accordion>
+          <Box width={{ base: '100%', lg: "20%" }}>
+            <Hide below='lg'>
+              <Filter setState={setState} />
+            </Hide>
+
+            {showfilter && <Filter setState={setState} />}
           </Box>
-          <SimpleGrid>
-            {state.map((item) => <Image src={item.image} />)}
+          <Box width={{ base: '100%', lg: "80%" }}>
+            <Flex border={"1px solid red"} justifyContent={"flex-end"}>
+              <Hide above='lg'>
+                <Button onClick={() => Togglefilter(!showfilter)}>{showfilter ? "Hide filters" : "Show Filters"}</Button>
+              </Hide>
+              <Select ml={"20px"} placeholder='Select option' width={"40%"} onChange={(e) => handleChange(e)}>
+                <option value='A to Z'>Alphabeticalorder A to Z</option>
+                <option value='Z to A'>Alphabeticalorder Z to A</option>
+                <option value='asc'>Prices Ascending</option>
+                <option value="desc">Prices Descending</option>
+              </Select>
+            </Flex>
+
+            <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={5}>
+              {state.map((item) =>
+
+                <RouterLink to={`/product/:${item.id}`} >
+              <Card maxW='sm' textAlign={"left"}>
+                <CardBody>
+                  <Box backgroundColor={"#f5f5f5"}>
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                    />
+                  </Box>
+
+                  <Divider />
+                  <Box>
+                    <Stack mt='6'>
+                      <Heading size='md'>{item.name}</Heading>
+                      <Text color='black' fontSize='md'>
+                        {item.brand} {item.color}
+                      </Text>
+                      <Text color='black' fontSize='md'>
+                        ${item.price}
+                      </Text>
+                    </Stack>
+                  </Box>
+
+                </CardBody>
+              </Card>
+              </RouterLink>
+              )}
           </SimpleGrid>
-        </Flex>
       </Box>
 
-      <Footer />
-    </div>
+    </Flex>
+      </Box >
+
+  <Footer />
+    </div >
   )
 }
 
