@@ -66,7 +66,8 @@ const ProductPage = () => {
           })
          }else{
           axios.post(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/cart`, {
-           ...data
+           ...data,
+           size : buttonsize.size
           })
           .then(function (response) {
             console.log(response);

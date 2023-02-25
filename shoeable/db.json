@@ -517,23 +517,24 @@
   ],
   "cart": [
     {
-      "id": 1,
-      "name": "Adidas Ultraboost Web DNA",
-      "price": 149,
+      "id": 2,
+      "name": "Adidas Ultraboost Web DNA Running Sportswear Shoes",
+      "price": 199,
       "image": [
-        "https://images.footlocker.com/is/image/EBFL2/GY4173_a1?wid=400&hei=400&fmt=png-alpha",
-        "https://images.footlocker.com/is/image/EBFL2/GY4173_a2?wid=400&hei=400&fmt=png-alpha",
-        "https://images.footlocker.com/is/image/EBFL2/GY4173_a4?wid=400&hei=400&fmt=png-alpha"
+        "https://images.footlocker.com/is/image/EBFL2/GY0077_a1?wid=500&hei=500&fmt=png-alpha",
+        "https://images.footlocker.com/is/image/EBFL2/GY0077_a2?wid=500&hei=500&fmt=png-alpha",
+        "https://images.footlocker.com/is/image/EBFL2/GY0077_a4?wid=500&hei=500&fmt=png-alpha"
       ],
       "brand": "Mens",
       "productline": "Adidas",
-      "color": "Black",
-      "description": "With design elements inspired by the movement and motion of city life, the Wild Rider Layers Unisex Sneakers brings a fresh new dimension to the iconic Rider family. We've layered a rich mix of premium leather, suede and hairy suede onto a nylon upper to create texture and a raw edgy look that is pure street. The IMEVA midsole and rubber outsole ensure combined lightweight comfort and great traction to take you forward, further and faster through your day and beyond.",
-      "quantity": 1,
+      "color": "Blue",
+      "description": "Premium material and tech features are given a branded boost from German engineering. The Mercedes Kart Cat-X Tech Unisex Sneakers areleant style and esteem by Mercedes-AMG Petronas Motorsport. The piece rises to the occasion with an all-leather upper.",
+      "quantity": "4",
       "rating": {
-        "rate": 3.9,
-        "count": 120
-      }
+        "rate": 4.1,
+        "count": 259
+      },
+      "size": "8.5"
     }
   ],
   "users": [
