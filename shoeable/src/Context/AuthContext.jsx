@@ -5,6 +5,7 @@ export const AuthContext = createContext();
 const initState = {
     isAuth : false,
     username : "",
+    brand : "",
 }
 const reducer = (state,{type,payload})=>{
   switch(type){
@@ -17,6 +18,10 @@ const reducer = (state,{type,payload})=>{
         ...state,
         isAuth : false,
         username: ""
+    }
+    case "brand" : return{
+      ...state,
+      brand : payload
     }
     default : return state
   }

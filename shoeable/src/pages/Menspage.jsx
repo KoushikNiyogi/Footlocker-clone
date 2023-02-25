@@ -6,8 +6,11 @@ import { Box, Stack, Heading, Text, Divider, Flex, Image, SimpleGrid, Hide, Butt
 import { Card, CardBody } from '@chakra-ui/react'
 import Filter from '../components/Filter'
 import { Link as RouterLink } from "react-router-dom"
+import { useContext } from 'react'
+import { AuthContext } from '../Context/AuthContext'
 
 const Menspage = () => {
+  const {dispatch} = useContext(AuthContext)
   const [state, setState] = useState([])
   const [showfilter, Togglefilter] = useState(false);
   const handleChange = (e) => {
@@ -95,7 +98,7 @@ const Menspage = () => {
               {state.map((item) =>
 
                 <RouterLink to={`/product/:${item.id}`} >
-              <Card maxW='sm' textAlign={"left"}>
+              <Card maxW='sm' textAlign={"left"} onClick={()=>dispatch({type:"brand",payload:"Mens"})}>
                 <CardBody>
                   <Box backgroundColor={"#f5f5f5"}>
                     <Image
