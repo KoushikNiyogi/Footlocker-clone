@@ -515,11 +515,25 @@
       }
     }
   ],
-  "comments": [
+  "cart": [
     {
       "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "name": "Adidas Ultraboost Web DNA",
+      "price": 149,
+      "image": [
+        "https://images.footlocker.com/is/image/EBFL2/GY4173_a1?wid=400&hei=400&fmt=png-alpha",
+        "https://images.footlocker.com/is/image/EBFL2/GY4173_a2?wid=400&hei=400&fmt=png-alpha",
+        "https://images.footlocker.com/is/image/EBFL2/GY4173_a4?wid=400&hei=400&fmt=png-alpha"
+      ],
+      "brand": "Mens",
+      "productline": "Adidas",
+      "color": "Black",
+      "description": "With design elements inspired by the movement and motion of city life, the Wild Rider Layers Unisex Sneakers brings a fresh new dimension to the iconic Rider family. We've layered a rich mix of premium leather, suede and hairy suede onto a nylon upper to create texture and a raw edgy look that is pure street. The IMEVA midsole and rubber outsole ensure combined lightweight comfort and great traction to take you forward, further and faster through your day and beyond.",
+      "quantity": 1,
+      "rating": {
+        "rate": 3.9,
+        "count": 120
+      }
     }
   ],
   "users": [
