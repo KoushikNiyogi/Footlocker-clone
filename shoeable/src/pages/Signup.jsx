@@ -40,6 +40,14 @@ const reducer = (state,{type,payload})=>{
       ...state,
       mobileno:payload
     }
+    case "address" : return{
+      ...state,
+      address:payload
+    }
+    case "state" : return{
+      ...state,
+      mobileno:payload
+    }
     default:return state
   }
 }
