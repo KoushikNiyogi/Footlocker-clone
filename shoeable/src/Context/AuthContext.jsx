@@ -6,6 +6,10 @@ const initState = {
     isAuth : false,
     username : "",
     brand : "",
+    total : "",
+    quantity : "",
+    cartid : [],
+    payment : false
 }
 const reducer = (state,{type,payload})=>{
   switch(type){
@@ -22,6 +26,22 @@ const reducer = (state,{type,payload})=>{
     case "brand" : return{
       ...state,
       brand : payload
+    }
+    case "total" : return{
+      ...state,
+      total : payload
+    }
+    case "quantity" : return{
+      ...state,
+      quantity : payload
+    }
+    case "cartid" : return{
+      ...state,
+      cartid : [...payload]
+    }
+    case "payment" : return{
+      ...state,
+      payment : payload
     }
     default : return state
   }

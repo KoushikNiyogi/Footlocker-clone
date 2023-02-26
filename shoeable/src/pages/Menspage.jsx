@@ -8,11 +8,13 @@ import Filter from '../components/Filter'
 import { Link as RouterLink } from "react-router-dom"
 import { useContext } from 'react'
 import { AuthContext } from '../Context/AuthContext'
-
+import Pagination from '../components/Pagination'
 const Menspage = () => {
   const {dispatch} = useContext(AuthContext)
   const [state, setState] = useState([])
+  const [totalpage,setTotalpage] = useState(0);
   const [showfilter, Togglefilter] = useState(false);
+  const [page,setPage] = useState(1);
   const handleChange = (e) => {
     let select = e.target.value;
     if (select === "A to Z") {
@@ -58,13 +60,25 @@ const Menspage = () => {
   }
   useEffect(() => {
     axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens`)
+    .then((res) => {
+      let totalCount = res.data.length;
+      setTotalpage(Math.ceil(totalCount/8));
+      
+
+    })
+    .catch((err) => console.log(err))
+
+
+
+    axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens&_page=${page}&_limit=8`)
       .then((res) => {
-        console.log(res.data)
+        let totalCount = res.data.length;
+        (Math.ceil(totalCount/8));
         setState(res.data)
+
       })
       .catch((err) => console.log(err))
-  }, [])
-  console.log(state)
+  }, [page])
   return (
     <div>
       <Navbar setState={setState} />
@@ -98,8 +112,8 @@ const Menspage = () => {
               {state.map((item) =>
 
                 <RouterLink to={`/product/:${item.id}`} >
-              <Card maxW='sm' textAlign={"left"} onClick={()=>dispatch({type:"brand",payload:"Mens"})}>
-                <CardBody>
+                 <Card maxW='sm' textAlign={"left"} onClick={()=>dispatch({type:"brand",payload:"Mens"})}>
+                  <CardBody>
                   <Box backgroundColor={"#f5f5f5"}>
                     <Image
                       src={item.image}
@@ -125,6 +139,7 @@ const Menspage = () => {
               </RouterLink>
               )}
           </SimpleGrid>
+          <Pagination  mt={"10px"}  mb={"10px"}  current = {page} setPage = {setPage} totalpage={totalpage}/>
       </Box>
 
     </Flex>

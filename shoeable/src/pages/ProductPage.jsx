@@ -6,7 +6,8 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import { useToast } from '@chakra-ui/react'
-
+import { useContext } from 'react'
+import { AuthContext } from '../Context/AuthContext'
 const size = [{ text: 10 }, { text: 9.5 }, { text: 9 }, { text: 8.5 }, { text: 8 }, { text: 7.5 }, { text: 7 }, { text: 6.5 }, { text: 6 }, { text: 5.5 }, { text: 5 }]
 const initialsize = {
   isClicked: false,
@@ -15,14 +16,16 @@ const initialsize = {
 
 const ProductPage = () => {
   const { id } = useParams();
-  const [char, userid] = id.split("");
+  const [char, userid] = id.split(":");
   const [images, setimages] = useState([])
   const [data, setdata] = useState({})
   const [setimage, updateimage] = useState("")
   const [buttonsize, updatebuttonsize] = useState(initialsize)
   const [cartdata,setcartdata] = useState([]);
   const toast = useToast()
-
+  const {state,dispatch} = useContext(AuthContext)
+  
+console.log(userid)
   useEffect(() => {
     axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens/${userid}`)
       .then((res) => {
@@ -65,8 +68,15 @@ const ProductPage = () => {
             isClosable: true,
           })
          }else{
+          if(data.length!=0){
+            
+              let newArr = [...state.cartid,data.id] 
+              dispatch({type:"cartid",payload:newArr})
+           
+          }
           axios.post(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/cart`, {
-           ...data
+           ...data,
+           size : buttonsize.size
           })
           .then(function (response) {
             console.log(response);
@@ -74,6 +84,7 @@ const ProductPage = () => {
           .catch(function (error) {
             console.log(error);
           });
+         
           toast({
             title: 'Product added in cart.',
             description: "Please checkout cart page",
@@ -85,6 +96,9 @@ const ProductPage = () => {
          }
       }
   }
+
+
+  console.log(state)
   return (
     <div>
       <Navbar />
