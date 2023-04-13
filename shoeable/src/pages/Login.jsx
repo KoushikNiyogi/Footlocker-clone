@@ -35,7 +35,7 @@ export default function Login() {
 
 
   useEffect(()=>{
-    axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/users`)
+    axios.get(`https://shoeable-server.onrender.com/users`)
     .then((res)=>{
       setUserdata(res.data)
     })

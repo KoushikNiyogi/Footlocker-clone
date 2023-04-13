@@ -26,7 +26,7 @@ const Navbar = ({setState}) => {
     setText(e.target.value);
   }
   const handlesearchClick = ()=>{
-    axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens&q=${text}`)
+    axios.get(`https://shoeable-server.onrender.com/products?brand=Mens&q=${text}`)
     .then((res)=>{
       console.log(res.data);
       setState(res.data)})

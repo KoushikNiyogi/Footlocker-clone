@@ -63,7 +63,7 @@ const Payment = () => {
     }
     if (obj.cardno !== undefined && obj.cardname !== undefined && obj.expiry !== undefined && obj.cvv !== undefined) {
       state.cartid.forEach((item) => {
-        axios.delete(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/cart/${item}`)
+        axios.delete(`https://shoeable-server.onrender.com/cart/${item}`)
           .then((res) => {
            console.log(res)
            Navigate("/success");

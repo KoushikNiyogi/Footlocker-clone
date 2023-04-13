@@ -54,7 +54,7 @@ const Address = () => {
   const [formstate,dispatcher] = useReducer(reducer,initialState);
 
   const fetchandupdate = () => {
-    axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/cart`)
+    axios.get(`https://shoeable-server.onrender.com/cart`)
       .then((res) => {
         
        

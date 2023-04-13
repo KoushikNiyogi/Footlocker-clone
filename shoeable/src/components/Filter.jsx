@@ -31,7 +31,7 @@ const Filter = ({setState}) => {
                                         if (e.target.checked) {
                                             obj.color = e.target.value;
                                         }
-                                        axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens`, {
+                                        axios.get(`https://shoeable-server.onrender.com/products?brand=Mens`, {
                                             params: {
                                                 ...obj
                                             }
@@ -73,7 +73,7 @@ const Filter = ({setState}) => {
                                         if (e.target.checked) {
                                             obj["productline"] = e.target.value;
                                         }
-                                        axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens`, {
+                                        axios.get(`https://shoeable-server.onrender.com/products?brand=Mens`, {
                                             params: {
                                                 ...obj
                                             }
@@ -117,21 +117,21 @@ const Filter = ({setState}) => {
                                         }
                                         console.log(select)
                                         if (select === '50-75') {
-                                            axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens&price_gte=50&price_lte=75`)
+                                            axios.get(`https://shoeable-server.onrender.com/products?brand=Mens&price_gte=50&price_lte=75`)
                                                 .then((res) => {
                                                     setState(res.data)
                                                 })
                                                 .catch((err) => console.log(err))
                                         }
                                         if (select === '75-100') {
-                                            axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens&price_gte=76&price_lte=100`)
+                                            axios.get(`https://shoeable-server.onrender.com/products?brand=Mens&price_gte=76&price_lte=100`)
                                                 .then((res) => {
                                                     setState(res.data)
                                                 })
                                                 .catch((err) => console.log(err))
                                         }
                                         if (select === '100-125') {
-                                            axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens&price_gte=101&price_lte=125`)
+                                            axios.get(`https://shoeable-server.onrender.com/products?brand=Mens&price_gte=101&price_lte=125`)
                                                 .then((res) => {
                                                     console.log(res.data)
                                                     setState(res.data)
@@ -139,14 +139,14 @@ const Filter = ({setState}) => {
                                                 .catch((err) => console.log(err))
                                         }
                                         if (select === '125-150') {
-                                            axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens&price_gte=126&price_lte=150`)
+                                            axios.get(`https://shoeable-server.onrender.com/products?brand=Mens&price_gte=126&price_lte=150`)
                                                 .then((res) => {
                                                     setState(res.data)
                                                 })
                                                 .catch((err) => console.log(err))
                                         }
                                         if (select === '>150') {
-                                            axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens&price_gte=151&price_lte=200`)
+                                            axios.get(`https://shoeable-server.onrender.com/products?brand=Mens&price_gte=151&price_lte=200`)
                                                 .then((res) => {
                                                     console.log(res.data)
                                                     setState(res.data)
@@ -154,7 +154,7 @@ const Filter = ({setState}) => {
                                                 .catch((err) => console.log(err))
                                         }
                                         if (select === undefined) {
-                                            axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens`)
+                                            axios.get(`https://shoeable-server.onrender.com/products?brand=Mens`)
                                                 .then((res) => {
                                                     console.log(res.data)
                                                     setState(res.data)
@@ -197,21 +197,21 @@ const Filter = ({setState}) => {
                                         }
                                         console.log(select)
                                         if (select === '1-2') {
-                                            axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens&rating.rate_gte=1&rating.rate_lte=2`)
+                                            axios.get(`https://shoeable-server.onrender.com/products?brand=Mens&rating.rate_gte=1&rating.rate_lte=2`)
                                                 .then((res) => {
                                                     setState(res.data)
                                                 })
                                                 .catch((err) => console.log(err))
                                         }
                                         if (select === '2-3') {
-                                            axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens&rating.rate_gte=2&rating.rate_lte=3`)
+                                            axios.get(`https://shoeable-server.onrender.com/products?brand=Mens&rating.rate_gte=2&rating.rate_lte=3`)
                                                 .then((res) => {
                                                     setState(res.data)
                                                 })
                                                 .catch((err) => console.log(err))
                                         }
                                         if (select === '3-4') {
-                                            axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens&rating.rate_gte=3&rating.rate_lte=4`)
+                                            axios.get(`https://shoeable-server.onrender.com/products?brand=Mens&rating.rate_gte=3&rating.rate_lte=4`)
                                                 .then((res) => {
                                                     console.log(res.data)
                                                     setState(res.data)
@@ -219,7 +219,7 @@ const Filter = ({setState}) => {
                                                 .catch((err) => console.log(err))
                                         }
                                         if (select === '4-5') {
-                                            axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens&rating.rate_gte=4&rating.rate_lte=5`)
+                                            axios.get(`https://shoeable-server.onrender.com/products?brand=Mens&rating.rate_gte=4&rating.rate_lte=5`)
                                                 .then((res) => {
                                                     setState(res.data)
                                                 })
@@ -227,7 +227,7 @@ const Filter = ({setState}) => {
                                         }
 
                                         if (select === undefined) {
-                                            axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens`)
+                                            axios.get(`https://shoeable-server.onrender.com/products?brand=Mens`)
                                                 .then((res) => {
                                                     console.log(res.data)
                                                     setState(res.data)

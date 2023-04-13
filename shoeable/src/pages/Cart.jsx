@@ -16,7 +16,7 @@ const Cart = () => {
   const toast = useToast()
   const [cartid,setcartid] = useState([]);
   const fetchandupdate = () => {
-    axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/cart`)
+    axios.get(`https://shoeable-server.onrender.com/cart`)
       .then((res) => {
         setTotal(res.data.reduce((acc, item) => {
           let price = item.price;
@@ -43,7 +43,7 @@ const Cart = () => {
 
   const handleChange = (e, id) => {
     let select = e.target.value;
-    axios.patch(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/cart/${id}`, {
+    axios.patch(`https://shoeable-server.onrender.com/cart/${id}`, {
 
       quantity: select
 
@@ -55,7 +55,7 @@ const Cart = () => {
   }
 
   const hnadleDlelete = (id) => {
-    axios.delete(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/cart/${id}`)
+    axios.delete(`https://shoeable-server.onrender.com/cart/${id}`)
       .then((res) => {
         fetchandupdate();
       })
@@ -63,19 +63,19 @@ const Cart = () => {
   }
 
   const handlePlaceorder = () =>{
-    if(!state.isAuth){
+    /*if(!state.isAuth){
      return toast({
       title: 'User is not Logged in',
       status: 'error',
       duration: 9000,
       isClosable: true,
     })
-     }else{
+     }else{*/
       
       dispatch({type: "total", payload : total})
       dispatch({type: "quantity", payload : quantity})
       Navigate("/address");
-     }
+     /*}*/
      
 
     }

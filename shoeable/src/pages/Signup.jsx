@@ -61,7 +61,7 @@ const Signup = () => {
     if(state.firstname!==""&&state.lastname!==""&&state.gender!==""&&state.email!==""&&state.password!==""&&state.mobileno!==""){
       axios({
         method: 'post',
-        url: `http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/users`,
+        url: `https://shoeable-server.onrender.com/users`,
         data: {
           ...obj
         }

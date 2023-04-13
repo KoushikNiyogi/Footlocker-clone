@@ -5,20 +5,28 @@ import Footer from '../components/Footer'
 import { Box, Stack, Heading, Text, Divider, Flex, Image, SimpleGrid, Hide, Button, Select } from '@chakra-ui/react'
 import { Card, CardBody } from '@chakra-ui/react'
 import Filter from '../components/Filter'
-import { Link as RouterLink } from "react-router-dom"
+import { Link as RouterLink, useNavigate } from "react-router-dom"
 import { useContext } from 'react'
 import { AuthContext } from '../Context/AuthContext'
 import Pagination from '../components/Pagination'
+import { AiOutlineHeart } from 'react-icons/ai'
 const Menspage = () => {
   const {dispatch} = useContext(AuthContext)
   const [state, setState] = useState([])
   const [totalpage,setTotalpage] = useState(0);
   const [showfilter, Togglefilter] = useState(false);
   const [page,setPage] = useState(1);
+  const navigate = useNavigate();
+
+const handleCard = (item)=>{
+   console.log(item)
+}
+
+
   const handleChange = (e) => {
     let select = e.target.value;
     if (select === "A to Z") {
-      axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens&_sort=name&_order=asc`)
+      axios.get(`https://shoeable-server.onrender.com/products?brand=Mens&_sort=name&_order=asc`)
         .then((res) => {
           console.log(res.data);
           setState(res.data);
@@ -26,7 +34,7 @@ const Menspage = () => {
         .catch((err) => console.log(err))
     }
     if (select === "Z to A") {
-      axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens&_sort=name&_order=desc`)
+      axios.get(`https://shoeable-server.onrender.com/products?brand=Mens&_sort=name&_order=desc`)
         .then((res) => {
           console.log(res.data);
           setState(res.data);
@@ -34,7 +42,7 @@ const Menspage = () => {
         .catch((err) => console.log(err))
     }
     if (select === "asc") {
-      axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens&_sort=price&_order=asc`)
+      axios.get(`https://shoeable-server.onrender.com/products?brand=Mens&_sort=price&_order=asc`)
         .then((res) => {
           console.log(res.data);
           setState(res.data);
@@ -42,7 +50,7 @@ const Menspage = () => {
         .catch((err) => console.log(err))
     }
     if (select === "desc") {
-      axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens&_sort=price&_order=desc`)
+      axios.get(`https://shoeable-server.onrender.com/products?brand=Mens&_sort=price&_order=desc`)
         .then((res) => {
           console.log(res.data);
           setState(res.data);
@@ -50,7 +58,7 @@ const Menspage = () => {
         .catch((err) => console.log(err))
     }
     if (select === "") {
-      axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens`)
+      axios.get(`https://shoeable-server.onrender.com/products?brand=Mens`)
         .then((res) => {
           console.log(res.data);
           setState(res.data);
@@ -59,7 +67,7 @@ const Menspage = () => {
     }
   }
   useEffect(() => {
-    axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens`)
+    axios.get(`https://shoeable-server.onrender.com/products?brand=Mens`)
     .then((res) => {
       let totalCount = res.data.length;
       setTotalpage(Math.ceil(totalCount/8));
@@ -70,7 +78,7 @@ const Menspage = () => {
 
 
 
-    axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Mens&_page=${page}&_limit=8`)
+    axios.get(`https://shoeable-server.onrender.com/products?brand=Mens&_page=${page}&_limit=8`)
       .then((res) => {
         let totalCount = res.data.length;
         (Math.ceil(totalCount/8));
@@ -111,10 +119,17 @@ const Menspage = () => {
             <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={5}>
               {state.map((item) =>
 
-                <RouterLink to={`/product/:${item.id}`} >
-                 <Card maxW='sm' textAlign={"left"} onClick={()=>dispatch({type:"brand",payload:"Mens"})}>
+                 <Card maxW='sm' textAlign={"left"} onClick={()=>{
+                  dispatch({type:"brand",payload:"Mens"});
+                  navigate(`/product/:${item.id}`)
+                  }}>
                   <CardBody>
                   <Box backgroundColor={"#f5f5f5"}>
+                  <Flex justifyContent={"flex-end"} padding={"10px"}><AiOutlineHeart onClick={(e)=>{
+                    e.stopPropagation();
+                    handleCard(item)
+                    }} size={"25px"}/></Flex>
+
                     <Image
                       src={item.image}
                       alt={item.title}
@@ -136,7 +151,6 @@ const Menspage = () => {
 
                 </CardBody>
               </Card>
-              </RouterLink>
               )}
           </SimpleGrid>
           <Pagination  mt={"10px"}  mb={"10px"}  current = {page} setPage = {setPage} totalpage={totalpage}/>

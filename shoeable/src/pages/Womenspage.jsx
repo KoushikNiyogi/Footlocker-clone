@@ -9,7 +9,7 @@ import { Link as RouterLink } from "react-router-dom"
 import { useContext } from 'react'
 import { AuthContext } from '../Context/AuthContext'
 import Pagination from '../components/Pagination'
-
+import {AiOutlineHeart} from "react-icons/ai"
 const Womenspage = () => {
   const {dispatch} = useContext(AuthContext)
   const [state, setState] = useState([])
@@ -20,7 +20,7 @@ const Womenspage = () => {
   const handleChange = (e) => {
     let select = e.target.value;
     if (select === "A to Z") {
-      axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Womens&_sort=name&_order=asc`)
+      axios.get(`https://shoeable-server.onrender.com/products?brand=Womens&_sort=name&_order=asc`)
         .then((res) => {
           console.log(res.data);
           setState(res.data);
@@ -28,7 +28,7 @@ const Womenspage = () => {
         .catch((err) => console.log(err))
     }
     if (select === "Z to A") {
-      axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Womens&_sort=name&_order=desc`)
+      axios.get(`https://shoeable-server.onrender.com/products?brand=Womens&_sort=name&_order=desc`)
         .then((res) => {
           console.log(res.data);
           setState(res.data);
@@ -36,7 +36,7 @@ const Womenspage = () => {
         .catch((err) => console.log(err))
     }
     if (select === "asc") {
-      axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Womens&_sort=price&_order=asc`)
+      axios.get(`https://shoeable-server.onrender.com/products?brand=Womens&_sort=price&_order=asc`)
         .then((res) => {
           console.log(res.data);
           setState(res.data);
@@ -44,7 +44,7 @@ const Womenspage = () => {
         .catch((err) => console.log(err))
     }
     if (select === "desc") {
-      axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Womens&_sort=price&_order=desc`)
+      axios.get(`https://shoeable-server.onrender.com/products?brand=Womens&_sort=price&_order=desc`)
         .then((res) => {
           console.log(res.data);
           setState(res.data);
@@ -52,7 +52,7 @@ const Womenspage = () => {
         .catch((err) => console.log(err))
     }
     if (select === "") {
-      axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Womens`)
+      axios.get(`https://shoeable-server.onrender.com/products?brand=Womens`)
         .then((res) => {
           console.log(res.data);
           setState(res.data);
@@ -62,14 +62,14 @@ const Womenspage = () => {
   }
   useEffect(() => {
 
-    axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Womens`)
+    axios.get(`https://shoeable-server.onrender.com/products?brand=Womens`)
       .then((res) => {
         let totalCount = res.data.length;
         setTotalpage(Math.ceil(totalCount/8));
       })
       .catch((err) => console.log(err))
 
-      axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens?brand=Womens&_page=${page}&_limit=8`)
+      axios.get(`https://shoeable-server.onrender.com/products?brand=Womens&_page=${page}&_limit=8`)
       .then((res) => {
         
         setState(res.data)
@@ -112,6 +112,7 @@ const Womenspage = () => {
                  <Card maxW='sm' textAlign={"left"} onClick={()=>dispatch({type:"brand",payload:"Mens"})}>
                   <CardBody>
                   <Box backgroundColor={"#f5f5f5"}>
+                    <Flex justifyContent={"flex-end"} padding={"10px"}><AiOutlineHeart size={"25px"}/></Flex>
                     <Image
                       src={item.image}
                       alt={item.title}

@@ -27,7 +27,7 @@ const ProductPage = () => {
   
 console.log(userid)
   useEffect(() => {
-    axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/Mens/${userid}`)
+    axios.get(`https://shoeable-server.onrender.com/products/${userid}`)
       .then((res) => {
         setdata(res.data)
         setimages(res.data.image)
@@ -37,7 +37,7 @@ console.log(userid)
       .catch((err) => console.log(err))
 
 
-      axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/cart`)
+      axios.get(`https://shoeable-server.onrender.com/cart`)
        .then((res)=>setcartdata(res.data))
        .catch((err)=>console.log(err))
   }, [])
@@ -74,7 +74,7 @@ console.log(userid)
               dispatch({type:"cartid",payload:newArr})
            
           }
-          axios.post(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/cart`, {
+          axios.post(`https://shoeable-server.onrender.com/cart`, {
            ...data,
            size : buttonsize.size
           })
